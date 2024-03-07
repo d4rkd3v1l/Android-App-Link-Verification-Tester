@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-
-from typing import List
-import helpers.console
 import subprocess
 import os
+import helpers.console
 
 CHROME_PACKAGE = 'com.android.chrome/com.google.android.apps.chrome.Main'
 
@@ -28,16 +25,18 @@ def package_is_installed(package, adbpath):
 def check_device_requirements(package, apk, adbpath="adb"):
     devices = get_adb_devices(adbpath)
     if len(devices) == 0:
-        helpers.console.write_to_console('No devices detected by adb', helpers.console.bcolors.WARNING)
+        helpers.console.write_to_console(
+            'No devices detected by adb', helpers.console.BColors.WARNING
+        )
         exit()
     if not package_is_installed(package, adbpath="adb"):
         if apk is None:
             error_msg = 'Package is not installed and APK was not specified ...'
-            helpers.console.write_to_console(error_msg, helpers.console.bcolors.WARNING)
+            helpers.console.write_to_console(error_msg, helpers.console.BColors.WARNING)
             exit()
         else:
             error_msg = 'Package is not installed ...'
-            helpers.console.write_to_console(error_msg, helpers.console.bcolors.OKBLUE)
+            helpers.console.write_to_console(error_msg, helpers.console.BColors.OKBLUE)
             os.system("adb install " + apk)
 
 def write_file_to_device(file, dest, adbpath="adb"):

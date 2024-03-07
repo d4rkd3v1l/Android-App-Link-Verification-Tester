@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-
-from typing import List
-from bs4 import BeautifulSoup
 import itertools
 import re
+from bs4 import BeautifulSoup
 
 AUTOVERIFY_KEY = 'has-autoverify'
 INCLUDES_VIEW_ACTION_KEY = 'has-view-action'
@@ -29,9 +26,11 @@ def get_schemes(strings, manifest):
         scheme_items = intent_filter.findAll(is_scheme_data_tag)
         if len(scheme_items) > 0:
             activity_name = None
-            
+
             # find activity name from parent
-            parent_elem = intent_filter.find_parent(['activity', 'activity-alias', 'service', 'receiver'])
+            parent_elem = intent_filter.find_parent(
+                ['activity', 'activity-alias', 'service', 'receiver']
+            )
             if parent_elem:
                 # parent type
                 p_type = parent_elem.name
@@ -39,7 +38,8 @@ def get_schemes(strings, manifest):
                     activity_name = parent_elem['android:name']
                 elif p_type == 'activity-alias':
                     target_activity_name = parent_elem['android:targetActivity']
-                    target_activity = manifest_xml.find('activity', {'android:name': target_activity_name})
+                    target_activity = manifest_xml.find('activity',
+                                                        {'android:name': target_activity_name})
                     if target_activity:
                         activity_name = target_activity['android:name']
 
@@ -49,11 +49,11 @@ def get_schemes(strings, manifest):
                     schemes.append(item.get('android:scheme'))
                     hosts.append(item.get('android:host'))
                     ports.append(item.get('android:port'))
-                    
                     for k in ('path', 'pathPrefix', 'pathPattern'):
                         paths.append(item.get(f'android:{k}'))
 
-                schemes, hosts, ports, paths = map(list, map(set, map(lambda x: filter(None, x), [schemes, hosts, ports, paths])))
+                schemes, hosts, ports, paths = map(list,
+                                                   map(set, map(lambda x: filter(None, x), [schemes, hosts, ports, paths])))
                 no_port_path = (len(ports) == 0 and len(paths) == 0)
                 if len(ports) == 0: ports.append('')
                 if len(paths) == 0: paths.append('')
