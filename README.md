@@ -67,7 +67,7 @@ optional arguments:
 ### Use an APK to list all registered deep links
 
 ```
-~ python3 Android-App-Link-Verification-Tester/deeplinks_analyser.py \
+~ python3 Android-App-Link-Verification-Tester/deeplink_analyser.py \
 -op list-all \
 -apk <path-to-apk>
 ```
@@ -75,7 +75,7 @@ optional arguments:
 ### Use the manifest+strings file to list all registered Android App links
 
 ```
-~ python3 Android-App-Link-Verification-Tester/deeplinks_analyser.py \
+~ python3 Android-App-Link-Verification-Tester/deeplink_analyser.py \
 -op list-applinks \
 -m <path-to-android-manifest> \
 -s <path-to-strings-file>
@@ -84,7 +84,7 @@ optional arguments:
 ### Use an APK to check for DALs for all App Links
 
 ```
-~ python3 Android-App-Link-Verification-Tester/deeplinks_analyser.py \
+~ python3 Android-App-Link-Verification-Tester/deeplink_analyser.py \
 -op verify-applinks \
 -apk <path-to-apk> \
 -p <package-name>
@@ -152,7 +152,7 @@ Note that the package was not installed on the phone previously, so the script i
 ### Use the manifest+strings file to create a local POC
 
 ```
-~ python3 Android-App-Link-Verification-Tester/deeplinks_analyser.py \
+~ python3 Android-App-Link-Verification-Tester/deeplink_analyser.py \
 -op build-poc \
 -m <path-to-android-manifest> \
 -s <path-to-strings-file>
@@ -161,7 +161,7 @@ Note that the package was not installed on the phone previously, so the script i
 ### Use an APK to send the POC to the device via adb
 
 ```
-~ python3 Android-App-Link-Verification-Tester/deeplinks_analyser.py \
+~ python3 Android-App-Link-Verification-Tester/deeplink_analyser.py \
 -op launch-poc \
 -apk <path-to-apk> \
 -p <package-name>
