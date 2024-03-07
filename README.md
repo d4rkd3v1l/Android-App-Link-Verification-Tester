@@ -81,6 +81,8 @@ optional arguments:
 -s <path-to-strings-file>
 ```
 
+Note that the strings.xml file is typically under `/res/values/strings.xml`.
+
 ### Use an APK to check for DALs for all App Links
 
 ```
