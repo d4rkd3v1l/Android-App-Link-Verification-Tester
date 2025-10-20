@@ -1,13 +1,17 @@
+#!/usr/bin/env python3
+
 import subprocess
 
-KEYTOOL_PATH = 'keytool'
+KEYTOOL_PATH = 'apksigner'
 
 def get_sha256_cert_fingerprint(apk):
     apk_cert = subprocess.Popen(
-        KEYTOOL_PATH + ' -printcert -jarfile ' + apk, shell=True, stdout=subprocess.PIPE
+        KEYTOOL_PATH + ' verify --print-certs ' + apk, shell=True, stdout=subprocess.PIPE
     ).stdout.read().decode()
-    if 'SHA256: ' in apk_cert:
-        components = apk_cert.split('SHA256: ')
+    print(apk_cert)
+    if 'SHA-256 digest: ' in apk_cert:
+        components = apk_cert.split('1 certificate SHA-256 digest: ')
+        print(components)
         if len(components) > 1:
             return components[1].split('\n')[0]
-    return None
+    return None 
